@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Format, convert, and understand technical logs privately in your browser." />
+    <title>Log Workspace — Read, format and compare logs</title>
+    <link rel="stylesheet" href="./styles.css?v=10" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23e2136e'/%3E%3Cpath d='M17 20h30M17 32h22M17 44h27' stroke='white' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Log Workspace home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>Log <span class="brand-light">Workspace</span></span>
+      </a>
+      <div class="header-actions">
+        <div class="privacy-note"><span aria-hidden="true">●</span> Processed on this device</div>
+        <button class="clear-button" id="clear-all" type="button">Clear all</button>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="intro">
+        <div>
+          <h1>Turn difficult logs into something clear.</h1>
+        </div>
+        <p>Format, rearrange, and explain logs without sending them anywhere.</p>
+      </section>
+
+      <nav class="tabs" aria-label="Log tools" role="tablist">
+        <button class="tab" id="tab-format" data-tab="format" type="button" role="tab" aria-label="Format & Convert" aria-selected="false" tabindex="-1" aria-controls="pane-format"><span class="tool-icon" aria-hidden="true">{ }</span><span class="tool-label">Format &amp; Convert<small>Clean up JSON &amp; XML</small></span></button>
+        <button class="tab active" id="tab-vertical" data-tab="vertical" type="button" role="tab" aria-label="Make Vertical" aria-selected="true" aria-controls="pane-vertical"><span class="tool-icon" aria-hidden="true">≡</span><span class="tool-label">Make Vertical<small>One field per line</small></span></button>
+        <button class="tab" id="tab-compare" data-tab="compare" type="button" role="tab" aria-label="Compare Logs" aria-selected="false" tabindex="-1" aria-controls="pane-compare"><span class="tool-icon" aria-hidden="true">⇄</span><span class="tool-label">Compare Logs<small>Find changed values</small></span></button>
+        <button class="tab" id="tab-report" data-tab="report" type="button" role="tab" aria-label="Simple Report" aria-selected="false" tabindex="-1" aria-controls="pane-report"><span class="tool-icon" aria-hidden="true">▤</span><span class="tool-label">Simple Report<small>Read every detail clearly</small></span></button>
+      </nav>
+
+      <section class="tab-pane" id="pane-format" role="tabpanel" aria-labelledby="tab-format" hidden>
+        <div class="action-bar" aria-label="Conversion type">
+          <button class="choice active" data-format-mode="auto" type="button" aria-pressed="true">Auto format</button>
+          <button class="choice" data-format-mode="json-to-xml" type="button" aria-pressed="false">JSON → XML</button>
+          <button class="choice" data-format-mode="xml-to-json" type="button" aria-pressed="false">XML → JSON</button>
+        </div>
+        <section class="workspace" aria-label="Format and convert">
+          <article class="panel input-panel">
+            <div class="panel-head">
+              <div><span class="step">01</span><h2>Paste or upload</h2></div>
+              <div class="small-actions">
+                <button class="text-button upload-trigger" data-target="format-input" type="button">Upload file</button>
+                <button class="text-button" id="format-example" type="button">Use example</button>
+              </div>
+            </div>
+            <textarea id="format-input" spellcheck="false" placeholder="Paste JSON or XML here…"></textarea>
+            <div class="panel-foot"><span id="format-count">0 characters</span><button class="primary-button" id="run-format" type="button">Format <span aria-hidden="true">→</span></button></div>
+          </article>
+          <article class="panel output-panel">
+            <div class="panel-head">
+              <div><span class="step">02</span><h2>Clean result</h2></div>
+              <div class="small-actions"><button class="text-button copy-trigger" data-source="format-output" type="button">Copy</button><button class="text-button download-trigger" data-source="format-output" data-name="formatted-log.txt" type="button">Download</button></div>
+            </div>
+            <pre id="format-output" class="empty-output" tabindex="0" aria-live="polite">Your formatted result will appear here.</pre>
+            <div class="result-state neutral" id="format-state"><span aria-hidden="true">•</span> Ready for JSON or XML</div>
+          </article>
+        </section>
+      </section>
+
+      <section class="tab-pane active-pane" id="pane-vertical" role="tabpanel" aria-labelledby="tab-vertical">
+        <div class="action-bar compact-bar">
+          <span>Format each log body once. Existing repeated entries are kept.</span>
+        </div>
+        <section class="workspace" aria-label="Make log vertical">
+          <article class="panel input-panel">
+            <div class="panel-head">
+              <div><span class="step">01</span><h2>Original log</h2></div>
+              <div class="small-actions"><button class="text-button upload-trigger" data-target="vertical-input" type="button">Upload file</button><button class="text-button" id="vertical-example" type="button">Use example</button></div>
+            </div>
+            <textarea id="vertical-input" spellcheck="false" placeholder="Paste your text here…"><>firstName:Baki<> <>Lastname:Billah<></textarea>
+            <div class="panel-foot"><span id="vertical-count">45 characters</span><button class="primary-button" id="make-vertical" type="button">Make vertical <span aria-hidden="true">→</span></button></div>
+          </article>
+          <article class="panel output-panel">
+            <div class="panel-head">
+              <div><span class="step">02</span><h2>Vertical result</h2></div>
+              <div class="small-actions"><button class="text-button copy-trigger" data-source="vertical-output" type="button">Copy</button><button class="text-button download-trigger" data-source="vertical-output" data-name="vertical-log.txt" type="button">Download</button></div>
+            </div>
+            <pre id="vertical-output" tabindex="0" aria-live="polite"><>firstName:Baki<>
+<>Lastname:Billah<></pre>
+            <div class="result-state" id="vertical-state"><span aria-hidden="true">✓</span> 2 fields placed on separate lines</div>
+          </article>
+        </section>
+      </section>
+
+      <section class="tab-pane" id="pane-compare" role="tabpanel" aria-labelledby="tab-compare" hidden>
+        <div class="action-bar compact-bar">
+          <span>Match the same fields and show only what changed.</span>
+        </div>
+        <section class="compare-surface" aria-label="Compare two logs">
+          <div class="compare-inputs">
+            <article class="compare-source">
+              <div class="panel-head">
+                <div><span class="source-badge">A</span><h2>First log</h2></div>
+                <div class="small-actions"><button class="text-button upload-trigger" data-target="compare-a-input" type="button">Upload</button><button class="text-button" id="compare-a-example" type="button">Use example</button></div>
+              </div>
+              <textarea id="compare-a-input" spellcheck="false" placeholder="Paste the first log here…"></textarea>
+              <div class="source-foot"><span id="compare-a-count">0 characters</span></div>
+            </article>
+            <article class="compare-source">
+              <div class="panel-head">
+                <div><span class="source-badge alt">B</span><h2>Second log</h2></div>
+                <div class="small-actions"><button class="text-button upload-trigger" data-target="compare-b-input" type="button">Upload</button><button class="text-button" id="compare-b-example" type="button">Use example</button></div>
+              </div>
+              <textarea id="compare-b-input" spellcheck="false" placeholder="Paste the second log here…"></textarea>
+              <div class="source-foot"><span id="compare-b-count">0 characters</span></div>
+            </article>
+          </div>
+          <div class="compare-action-row"><button class="primary-button" id="compare-logs" type="button">Check differences <span aria-hidden="true">→</span></button></div>
+          <article class="compare-result-panel">
+            <div class="panel-head">
+              <div><span class="step">03</span><h2>Differences found</h2></div>
+              <div class="small-actions"><button class="text-button" id="copy-comparison" type="button">Copy</button><button class="text-button" id="download-comparison" type="button">Download</button></div>
+            </div>
+            <div class="compare-empty" id="compare-empty"><span aria-hidden="true">⇄</span><p>The changed fields will appear here.</p></div>
+            <div class="compare-results" id="compare-results" hidden aria-live="polite"></div>
+          </article>
+        </section>
+      </section>
+
+      <section class="tab-pane" id="pane-report" role="tabpanel" aria-labelledby="tab-report" hidden>
+        <div class="action-bar compact-bar"><span>Request and response details, in plain language.</span></div>
+        <section class="workspace report-workspace" aria-label="Create simple report">
+          <article class="panel input-panel">
+            <div class="panel-head">
+              <div><span class="step">01</span><h2>Paste a complete log</h2></div>
+              <div class="small-actions"><button class="text-button upload-trigger" data-target="report-input" type="button">Upload file</button><button class="text-button" id="report-example" type="button">Use example</button></div>
+            </div>
+            <textarea id="report-input" spellcheck="false" placeholder="Paste the complete log here…"></textarea>
+            <div class="panel-foot"><span id="report-count">0 characters</span><button class="primary-button" id="create-report" type="button">Create report <span aria-hidden="true">→</span></button></div>
+          </article>
+          <article class="panel report-panel">
+            <div class="panel-head">
+              <div><span class="step">02</span><h2>Plain-language report</h2></div>
+              <div class="small-actions"><button class="text-button" id="copy-report" type="button">Copy</button><button class="text-button" id="download-report" type="button">Download</button></div>
+            </div>
+            <div class="report-empty" id="report-empty"><span class="report-empty-icon" aria-hidden="true">≡</span><p>Your short report will appear here.</p></div>
+            <div class="report-result" id="report-result" hidden aria-live="polite"></div>
+          </article>
+        </section>
+      </section>
+
+      <p class="security-strip"><strong>Privacy first.</strong> Everything runs inside this browser tab. Your content is not uploaded or saved.</p>
+    </main>
+
+    <input id="file-input" type="file" accept=".txt,.log,.json,.xml,text/plain,application/json,application/xml,text/xml" hidden />
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./log-core.js?v=8"></script>
+    <script src="./report-model.js?v=9"></script>
+    <script src="./app.js?v=10"></script>
+  </body>
+</html>
