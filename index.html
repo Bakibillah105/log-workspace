@@ -47,7 +47,7 @@
               <div><span class="step">01</span><h2>Paste or upload</h2></div>
               <div class="small-actions">
                 <button class="text-button upload-trigger" data-target="format-input" type="button">Upload file</button>
-                <button class="text-button" id="format-example" type="button">Use example</button>
+                
               </div>
             </div>
             <textarea id="format-input" spellcheck="false" placeholder="Paste JSON or XML here…"></textarea>
@@ -72,7 +72,7 @@
           <article class="panel input-panel">
             <div class="panel-head">
               <div><span class="step">01</span><h2>Original log</h2></div>
-              <div class="small-actions"><button class="text-button upload-trigger" data-target="vertical-input" type="button">Upload file</button><button class="text-button" id="vertical-example" type="button">Use example</button></div>
+              <div class="small-actions"><button class="text-button upload-trigger" data-target="vertical-input" type="button">Upload file</button></div>
             </div>
             <textarea id="vertical-input" spellcheck="false" placeholder="Paste your text here…"><>firstName:Baki<> <>Lastname:Billah<></textarea>
             <div class="panel-foot"><span id="vertical-count">45 characters</span><button class="primary-button" id="make-vertical" type="button">Make vertical <span aria-hidden="true">→</span></button></div>
@@ -98,7 +98,7 @@
             <article class="compare-source">
               <div class="panel-head">
                 <div><span class="source-badge">A</span><h2>First log</h2></div>
-                <div class="small-actions"><button class="text-button upload-trigger" data-target="compare-a-input" type="button">Upload</button><button class="text-button" id="compare-a-example" type="button">Use example</button></div>
+                <div class="small-actions"><button class="text-button upload-trigger" data-target="compare-a-input" type="button">Upload</button></div>
               </div>
               <textarea id="compare-a-input" spellcheck="false" placeholder="Paste the first log here…"></textarea>
               <div class="source-foot"><span id="compare-a-count">0 characters</span></div>
@@ -106,7 +106,7 @@
             <article class="compare-source">
               <div class="panel-head">
                 <div><span class="source-badge alt">B</span><h2>Second log</h2></div>
-                <div class="small-actions"><button class="text-button upload-trigger" data-target="compare-b-input" type="button">Upload</button><button class="text-button" id="compare-b-example" type="button">Use example</button></div>
+                <div class="small-actions"><button class="text-button upload-trigger" data-target="compare-b-input" type="button">Upload</button></div>
               </div>
               <textarea id="compare-b-input" spellcheck="false" placeholder="Paste the second log here…"></textarea>
               <div class="source-foot"><span id="compare-b-count">0 characters</span></div>
@@ -130,7 +130,7 @@
           <article class="panel input-panel">
             <div class="panel-head">
               <div><span class="step">01</span><h2>Paste a complete log</h2></div>
-              <div class="small-actions"><button class="text-button upload-trigger" data-target="report-input" type="button">Upload file</button><button class="text-button" id="report-example" type="button">Use example</button></div>
+              <div class="small-actions"><button class="text-button upload-trigger" data-target="report-input" type="button">Upload file</button></div>
             </div>
             <textarea id="report-input" spellcheck="false" placeholder="Paste the complete log here…"></textarea>
             <div class="panel-foot"><span id="report-count">0 characters</span><button class="primary-button" id="create-report" type="button">Create report <span aria-hidden="true">→</span></button></div>
@@ -153,6 +153,6 @@
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="./log-core.js?v=8"></script>
     <script src="./report-model.js?v=9"></script>
-    <script src="./app.js?v=10"></script>
+    <script src="./app.js?v=11"></script>
   </body>
 </html>

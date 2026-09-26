@@ -2,18 +2,6 @@ const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 
 const state = { activeTab: "vertical", formatMode: "auto", uploadTarget: null, reportText: "", comparisonText: "" };
-const examples = {
-  format: '{"referenceId":"TXN-20481","amount":"184.23","currency":"BDT","status":"Accepted","password":"private-value","customer":{"phone":"+8801700000000","country":"Bangladesh"}}',
-  vertical: "<>firstName:Baki<> <>Lastname:Billah<>",
-  compareA: "<>firstName:Baki<> <>lastName:Billah<> <>status:Active<>",
-  compareB: "<>firstName:Masum<> <>lastName:Haque<> <>status:Active<>",
-  report: [
-    '[INFO] [2026-09-26 10:30:00] RequestDispatcher Request: {"header":{"requestId":"REQ-20481","password":"demo-password"},"body":{"beneficiaryInfo":{"firstName":"Baki","lastName":"Billah","DOB":"08/10/1995"},"transactionInfo":{"initiationDate":"26/09/26","amount":3050,"currency":"BDT"}}}',
-    "[INFO] [2026-09-26 10:30:02] RequestDispatcher Response: {\"responseCode\":\"0\",\"responseMessage\":\"Request accepted successfully\"}",
-    "[WARN] [2026-09-26 10:30:03] Processing took longer than expected",
-    "[INFO] [2026-09-26 10:30:05] RequestDispatcher Response: {\"responseCode\":\"3000\",\"responseMessage\":\"Remit Success\",\"conversationID\":\"CONV-90871234\"}",
-  ].join("\n"),
-};
 
 function showToast(message) {
   const toast = $("#toast");
@@ -529,11 +517,6 @@ $$('[data-format-mode]').forEach((button) => button.addEventListener("click", ()
 }));
 [["format-input", "format-count"], ["vertical-input", "vertical-count"], ["compare-a-input", "compare-a-count"], ["compare-b-input", "compare-b-count"], ["report-input", "report-count"]].forEach(([input, count]) => $(`#${input}`).addEventListener("input", () => updateCount(input, count)));
 
-$("#format-example").addEventListener("click", () => { $("#format-input").value = examples.format; updateCount("format-input", "format-count"); runFormat(); });
-$("#vertical-example").addEventListener("click", () => { $("#vertical-input").value = examples.vertical; updateCount("vertical-input", "vertical-count"); makeVertical(); });
-$("#compare-a-example").addEventListener("click", () => { $("#compare-a-input").value = examples.compareA; updateCount("compare-a-input", "compare-a-count"); });
-$("#compare-b-example").addEventListener("click", () => { $("#compare-b-input").value = examples.compareB; updateCount("compare-b-input", "compare-b-count"); });
-$("#report-example").addEventListener("click", () => { $("#report-input").value = examples.report; updateCount("report-input", "report-count"); createReport(); });
 $("#run-format").addEventListener("click", runFormat); $("#make-vertical").addEventListener("click", makeVertical); $("#compare-logs").addEventListener("click", () => createComparison()); $("#create-report").addEventListener("click", () => createReport()); $("#clear-all").addEventListener("click", clearAll);
 $$('.copy-trigger').forEach((button) => button.addEventListener("click", () => copyText($(`#${button.dataset.source}`).textContent)));
 $$('.download-trigger').forEach((button) => button.addEventListener("click", () => downloadText($(`#${button.dataset.source}`).textContent, button.dataset.name)));
